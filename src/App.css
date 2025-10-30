@@ -1,3 +1,126 @@
+/* Sign Out Button Absolute Position */
+
+.signout-btn {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  z-index: 20;
+  background: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(99,102,241,0.10);
+  cursor: pointer;
+  transition: box-shadow 0.2s, transform 0.2s;
+  padding: 0;
+}
+.signout-btn:hover {
+  box-shadow: 0 4px 16px rgba(236,72,153,0.18);
+  transform: scale(1.08);
+}
+
+.container {
+  position: relative;
+}
+/* Google Login Modal Styles */
+.google-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(40, 40, 60, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.google-modal-card {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 8px 32px rgba(99,102,241,0.12), 0 1.5px 6px rgba(0,0,0,0.08);
+  padding: 2.5rem 2.5rem 2rem 2.5rem;
+  max-width: 370px;
+  width: 100%;
+  text-align: center;
+  position: relative;
+  animation: fadeIn 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.google-modal-logo {
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.google-modal-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6, #ec4899);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.google-modal-desc {
+  font-size: 1.05rem;
+  color: #444;
+  margin-bottom: 2rem;
+  opacity: 0.85;
+  line-height: 1.6;
+}
+
+.google-login-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  background: linear-gradient(90deg, #4285F4 0%, #34A853 100%);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.08rem;
+  font-weight: 600;
+  padding: 1rem 2rem;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(66,133,244,0.08);
+  transition: background 0.2s, transform 0.2s;
+  margin-bottom: 1.5rem;
+  min-width: 220px;
+}
+.google-login-btn:hover {
+  background: linear-gradient(90deg, #4285F4 0%, #EA4335 100%);
+  transform: translateY(-2px) scale(1.04);
+}
+.google-btn-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.google-btn-text {
+  font-size: 1.08rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+.google-modal-footer {
+  margin-top: 0.5rem;
+  color: #888;
+  font-size: 0.92rem;
+  opacity: 0.8;
+  text-align: center;
+}
 .app {
   width: 100%;
   max-width: 600px;
@@ -68,7 +191,7 @@
 .header h1 {
   font-size: 1.9rem;
   font-weight: 600;
-  background: linear-gradient(135deg, #6366f1, #8b5cf6, #ec4899);
+  background: linear-gradient(135deg, #ffffff, #dbeafe, #c084fc);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -78,11 +201,14 @@
 }
 
 .header p {
-  color: var(--text-secondary);
-  font-size: 0.9rem;
-  margin: 0;
+  font-size: 0.95rem;
   font-weight: 400;
-  opacity: 0.8;
+  color: rgba(255, 255, 255, 0.9); /* brightens text for contrast */
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.25); /* adds subtle depth */
+  margin: 0;
+  letter-spacing: 0.01em;
+  opacity: 1;
+  transition: all 0.3s ease;
 }
 
 .step-container {
