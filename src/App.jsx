@@ -280,7 +280,8 @@ function App() {
       formDataToSend.append('role', applicationData.role)
       formDataToSend.append('resume', file)
 
-      const response = await fetch('http://localhost:5000/api/email/send', {
+      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+      const response = await fetch(`${apiUrl}/api/email/send`, {
         method: 'POST',
         body: formDataToSend
       })
@@ -325,7 +326,8 @@ function App() {
 
   // Google OAuth login handler
   const handleGoogleLogin = () => {
-    window.location.href = 'http://localhost:5000/auth/google';
+    const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+    window.location.href = `${apiUrl}/auth/google`;
   };
 
 
