@@ -32,6 +32,10 @@ function App() {
     company: '',
     role: ''
   })
+  const [jd, setJd] = useState('')
+  const [instructions, setInstructions] = useState('')
+  const [generatedContent, setGeneratedContent] = useState({ subject: '', body: '' })
+  const [isGenerating, setIsGenerating] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [message, setMessage] = useState({ type: '', text: '' })
   const [showProfileForm, setShowProfileForm] = useState(false)
@@ -252,6 +256,39 @@ function App() {
     }
   }
 
+  const handleGenerateEmail = async () => {
+    setIsGenerating(true)
+    setMessage({ type: '', text: '' })
+    try {
+      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+      const response = await fetch(`${apiUrl}/api/email/generate`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          profile: profileData,
+          jd: jd,
+          recipientName: applicationData.recipientName,
+          company: applicationData.company,
+          instructions: instructions
+        })
+      })
+      const result = await response.json()
+      if (result.success) {
+        setGeneratedContent(result.data)
+        setMessage({ type: 'success', text: 'Email generated! You can edit it below.' })
+      } else {
+        setMessage({ type: 'error', text: result.error || 'Failed to generate email' })
+      }
+    } catch (error) {
+      console.error(error)
+      setMessage({ type: 'error', text: 'Failed to generate email. Please try again.' })
+    } finally {
+      setIsGenerating(false)
+    }
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     setIsLoading(true)
@@ -280,6 +317,11 @@ function App() {
       formDataToSend.append('role', applicationData.role)
       formDataToSend.append('resume', file)
 
+      if (generatedContent.subject && generatedContent.body) {
+        formDataToSend.append('customSubject', generatedContent.subject)
+        formDataToSend.append('customBody', generatedContent.body)
+      }
+
       const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
       const response = await fetch(`${apiUrl}/api/email/send`, {
         method: 'POST',
@@ -297,6 +339,9 @@ function App() {
           company: '',
           role: ''
         })
+        setJd('')
+        setInstructions('')
+        setGeneratedContent({ subject: '', body: '' })
         // Don't reset resumeFile or profileData - keep them for another email
         setStep(2) // Stay on step 2 to allow sending another email
       } else {
@@ -459,6 +504,14 @@ function App() {
                 handleApplicationChange={handleApplicationChange}
                 handleSubmit={handleSubmit}
                 isLoading={isLoading}
+                jd={jd}
+                setJd={setJd}
+                instructions={instructions}
+                setInstructions={setInstructions}
+                generatedContent={generatedContent}
+                setGeneratedContent={setGeneratedContent}
+                handleGenerateEmail={handleGenerateEmail}
+                isGenerating={isGenerating}
               />
             </div>
           )}
