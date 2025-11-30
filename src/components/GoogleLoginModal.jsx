@@ -1,37 +1,118 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import './LoginScreen.css';
 
+/**
+ * Modern login screen component with glassmorphism design
+ * @param {Object} props - Component props
+ * @param {Function} props.onLogin - Callback function when user clicks login button
+ */
+const GoogleLoginModal = ({ onLogin }) => {
+  return (
+    <div className="login-screen" role="dialog" aria-labelledby="login-title" aria-modal="true">
+      <div className="login-container">
+        {/* Animated Logo */}
+        <div className="login-logo">
+          <div className="login-logo-container">
+            <svg
+              className="login-logo-icon"
+              width="64"
+              height="64"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <defs>
+                <linearGradient id="loginLogoGradient" x1="0%" y1="100%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="#06B6D4" />
+                  <stop offset="50%" stopColor="#8b5cf6" />
+                  <stop offset="100%" stopColor="#ec4899" />
+                </linearGradient>
+              </defs>
 
-const GoogleLoginModal = ({ onLogin }) => (
-  <div className="modal-overlay google-modal-overlay">
-    <div className="google-modal-card">
-      <div className="google-modal-logo">
-        <svg width="48" height="48" viewBox="0 0 48 48">
-          <g>
-            <path fill="#4285F4" d="M24 9.5c3.54 0 6.04 1.53 7.43 2.81l5.48-5.48C33.44 3.36 28.98 1 24 1 14.61 1 6.48 7.98 3.5 17.02l6.73 5.23C12.13 15.09 17.56 9.5 24 9.5z"/>
-            <path fill="#34A853" d="M46.5 24.5c0-1.64-.15-3.22-.43-4.75H24v9h12.65c-.54 2.91-2.18 5.38-4.65 7.04l7.19 5.59C43.52 37.02 46.5 31.27 46.5 24.5z"/>
-            <path fill="#FBBC05" d="M10.23 28.25c-1.09-3.22-1.09-6.78 0-10l-6.73-5.23C1.64 16.61 0 20.13 0 24c0 3.87 1.64 7.39 3.5 10.98l6.73-5.23z"/>
-            <path fill="#EA4335" d="M24 46c5.98 0 11.02-1.98 14.98-5.39l-7.19-5.59c-2.01 1.35-4.59 2.13-7.79 2.13-6.44 0-11.87-5.59-13.77-13.25l-6.73 5.23C6.48 40.02 14.61 46 24 46z"/>
-            <path fill="none" d="M0 0h48v48H0z"/>
-          </g>
-        </svg>
-      </div>
-      <h2 className="google-modal-title">Sign in to Coldr</h2>
-      <p className="google-modal-desc">To use Coldr, please sign in with your Google account.<br/>We use Google to securely send job applications on your behalf.</p>
-      <button className="google-login-btn" onClick={onLogin}>
-        <span className="google-btn-icon">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-            <g>
-              <path fill="#4285F4" d="M21.35 11.1H12.18v2.8h5.18c-.22 1.18-1.32 3.47-5.18 3.47-3.12 0-5.67-2.59-5.67-5.77s2.55-5.77 5.67-5.77c1.78 0 2.97.76 3.65 1.41l2.49-2.42C17.13 3.99 14.89 2.8 12.18 2.8 6.98 2.8 2.8 7.08 2.8 12.2s4.18 9.4 9.38 9.4c5.41 0 8.99-3.81 8.99-9.18 0-.62-.07-1.09-.17-1.32z"/>
-            </g>
-          </svg>
-        </span>
-        <span className="google-btn-text">Continue with Google</span>
-      </button>
-      <div className="google-modal-footer">
-        <small>We never store your password. Authentication is handled securely by Google.</small>
+              {/* Envelope shape */}
+              <rect
+                x="3"
+                y="5"
+                width="18"
+                height="14"
+                rx="2"
+                fill="url(#loginLogoGradient)"
+                stroke="rgba(255,255,255,0.6)"
+                strokeWidth="1.6"
+              />
+              <path
+                d="M3 6l9 7 9-7"
+                stroke="white"
+                strokeWidth="1.6"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+            <h1 className="login-logo-text">Coldr</h1>
+          </div>
+          <div className="login-logo-glow"></div>
+        </div>
+
+        {/* Glassmorphism Card */}
+        <div className="login-card">
+          <h2 id="login-title" className="login-title">
+            Welcome Back
+          </h2>
+          <p className="login-subtitle">
+            Sign in to continue sending professional job applications with AI-powered emails
+          </p>
+
+          {/* Google Sign In Button */}
+          <button 
+            className="login-button"
+            onClick={onLogin}
+            aria-label="Sign in with Google"
+          >
+            <span className="login-button-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path 
+                  d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" 
+                  fill="#4285F4"
+                />
+                <path 
+                  d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" 
+                  fill="#34A853"
+                />
+                <path 
+                  d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" 
+                  fill="#FBBC05"
+                />
+                <path 
+                  d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" 
+                  fill="#EA4335"
+                />
+              </svg>
+            </span>
+            <span className="login-button-text">Continue with Google</span>
+          </button>
+
+          {/* Footer */}
+          <div className="login-footer">
+            <p>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+              </svg>
+              Secure authentication powered by Google
+            </p>
+          </div>
+        </div>
+
+        {/* Decorative Elements */}
+        <div className="login-decoration login-decoration-1"></div>
+        <div className="login-decoration login-decoration-2"></div>
       </div>
     </div>
-  </div>
-);
+  );
+};
+
+GoogleLoginModal.propTypes = {
+  onLogin: PropTypes.func.isRequired,
+};
 
 export default GoogleLoginModal;
