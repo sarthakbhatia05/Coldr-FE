@@ -16,7 +16,7 @@ const GoogleLoginModal = ({ onLogin }) => (
         </svg>
       </div>
       <h2 className="google-modal-title">Sign in to Coldr</h2>
-      <p className="google-modal-desc">To use Coldr, please sign in with your Google account.<br/>We use Google to securely send job applications on your behalf.</p>
+      <p className="google-modal-desc">To use Coldr, please sign in with your Google account.<br/>You can trust us, we use Google to securely send job applications on your behalf.</p>
       <button className="google-login-btn" onClick={onLogin}>
         <span className="google-btn-icon">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
