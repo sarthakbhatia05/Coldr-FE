@@ -12,11 +12,6 @@ jobs:
 
     steps:
 
-      - name: Build frontend
-        run: npm run build
-        env:
-            VITE_API_BASE_URL: ${{ secrets.VITE_API_BASE_URL }}
-            VITE_ENV: production
       - name: Checkout code
         uses: actions/checkout@v3
 
@@ -25,6 +20,9 @@ jobs:
 
       - name: Build frontend
         run: npm run build
+        env:
+            VITE_API_BASE_URL: ${{ secrets.VITE_API_BASE_URL }}
+            VITE_ENV: production
 
       - name: Upload to S3
         uses: jakejarvis/s3-sync-action@v0.5.1
