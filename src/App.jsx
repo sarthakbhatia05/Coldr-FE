@@ -371,6 +371,7 @@ function App() {
 
   // Google OAuth login handler
   const handleGoogleLogin = () => {
+    console.log('here1', import.meta.env.VITE_API_URL, import.meta.env.S3_BUCKET, import.meta.env.VITE_ENV)
     const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
     window.location.href = `${apiUrl}/auth/google`;
   };
