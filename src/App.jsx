@@ -46,6 +46,15 @@ function App() {
   const [showProfileDropdown, setShowProfileDropdown] = useState(false)
   const [showResumeDropdown, setShowResumeDropdown] = useState(false)
 
+  // Log environment variables on app start
+  useEffect(() => {
+    console.log('🚀 App started - Environment Variables:', {
+      VITE_API_URL: import.meta.env.VITE_API_URL,
+      VITE_ENV: import.meta.env.VITE_ENV,
+      MODE: import.meta.env.MODE
+    });
+  }, []);
+
   // Close dropdowns when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
